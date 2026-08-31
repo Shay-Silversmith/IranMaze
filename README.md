@@ -15,6 +15,7 @@ Fly the B-2 through a randomly generated maze to reach the target.
 - **Show Solution** — draws the path found by the algorithm you picked
 - **Properties** — switch between BFS, DFS and Best First Search
 - **Save** — stores the current maze in your browser so you can resume later
+- **Bell** 🔔 — mute the music and sound effects; your choice is remembered
 - **Ctrl + scroll** — zoom
 
 ## About this port

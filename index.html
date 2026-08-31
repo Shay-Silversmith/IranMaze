@@ -306,7 +306,7 @@ select.algo{
       <span>Steps <b id="steps">0</b></span>
       <span>Maze <b id="dims">20&#215;20</b></span>
     </div>
-    <button class="mute" id="tbMute" type="button" title="Mute sound" aria-label="Mute sound">&#128266;</button>
+    <button class="mute" id="tbMute" type="button" title="Mute music" aria-label="Mute music">&#128276;</button>
   </div>
 
   <div class="stage">
@@ -425,13 +425,24 @@ const audio = {
   victory: Object.assign(new Audio(ASSET.victory), { volume: 0.55 }),
   boom:    Object.assign(new Audio(ASSET.boom),    { volume: 1.0 })
 };
-let muted = false;
+const MUTE_KEY = "b2-maze-muted-v1";
+let muted = (() => {
+  try { return localStorage.getItem(MUTE_KEY) === "1"; } catch (e) { return false; }
+})();
 
 function applyMute() {
   for (const key in audio) audio[key].muted = muted;
   const btn = document.getElementById("tbMute");
-  btn.textContent = muted ? "\ud83d\udd07" : "\ud83d\udd0a";
-  btn.title = btn.ariaLabel = muted ? "Unmute sound" : "Mute sound";
+  btn.textContent = muted ? "\ud83d\udd15" : "\ud83d\udd14";
+  btn.title = btn.ariaLabel = muted ? "Unmute music" : "Mute music";
+  btn.setAttribute("aria-pressed", String(muted));
+}
+
+function toggleMute() {
+  muted = !muted;
+  try { localStorage.setItem(MUTE_KEY, muted ? "1" : "0"); } catch (e) { /* storage unavailable */ }
+  applyMute();
+  toast(muted ? "Music muted \ud83d\udd15" : "Music on \ud83d\udd14");
 }
 function playMusic() {
   audio.music.currentTime = 0;
@@ -1001,7 +1012,7 @@ document.getElementById("tbSolve").addEventListener("click", toggleSolution);
 document.getElementById("tbHelp").addEventListener("click", () => openOverlay("ovHow"));
 document.getElementById("tbProps").addEventListener("click", openProperties);
 document.getElementById("tbExit").addEventListener("click", () => openOverlay("ovExit"));
-document.getElementById("tbMute").addEventListener("click", () => { muted = !muted; applyMute(); });
+document.getElementById("tbMute").addEventListener("click", toggleMute);
 
 document.getElementById("algoSelect").addEventListener("change", e => {
   document.getElementById("algoDesc").textContent = ALGO_DESC[e.target.value];
