@@ -11,7 +11,10 @@ Developers: **Shay & Ellen**
 
 Fly the B-2 through a randomly generated maze to reach the target.
 
-- **Move** — arrow keys, WASD, or the on-screen pad on touch devices
+Works on a phone as well as a desktop — on a narrow screen the maze keeps square
+cells and sits clear of the on-screen pad.
+
+- **Move** — arrow keys, WASD, swipe, or the on-screen pad on touch devices
 - **Show Solution** — draws the path found by the algorithm you picked
 - **Properties** — switch between BFS, DFS and Best First Search
 - **Save** — stores the current maze in your browser so you can resume later
