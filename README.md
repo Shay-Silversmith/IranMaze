@@ -47,4 +47,4 @@ game fits in one file.
 ## Running it elsewhere
 
 `index.html` has no dependencies and no build step. Open it directly, or drop it on any
-static host.
+static host. 
